@@ -12,7 +12,12 @@ class ProdiisController extends Controller
      */
     public function index()
     {
-        //
+        // panggil model prodiis
+        $result = prodiis::all();
+       // dd($result);
+
+       //kirim data $result ke view prodiis/index.blade.php
+       return view('Prodiis.index')->with('Prodiis', $result);
     }
 
     /**
