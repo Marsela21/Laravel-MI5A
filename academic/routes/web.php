@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FakultasController;
+use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\ProdiisController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -21,4 +22,5 @@ Route::middleware('auth')->group(function () {
 //yg di tambahkan
 Route::resource('fakultas', FakultasController::class);
 Route::resource('prodiis', ProdiisController::class);
+Route::resource('mahasiswa', MahasiswaController::class);
 require __DIR__.'/auth.php';

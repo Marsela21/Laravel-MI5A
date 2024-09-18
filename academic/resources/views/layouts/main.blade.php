@@ -26,6 +26,7 @@
         <li class="nav-item sidebar-category">
           <p>Navigation</p>
           <span></span>
+<!-- Awal -->
         </li>
         <li class="nav-item">
           <a class="nav-link" href="index.html">
@@ -34,6 +35,25 @@
             <div class="badge badge-info badge-pill">2</div>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('fakultas.index')}}">
+            <i class="mdi mdi-bank menu-icon"></i>
+            <span class="menu-title">Fakultas</span>
+          </a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="{{ route('prodiis.index')}}">
+            <i class="mdi mdi-account-box-outline menu-icon"></i>
+            <span class="menu-title">Program Studi</span>
+          </a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="{{ route('mahasiswa.index')}}">
+            <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+            <span class="menu-title">Mahasiswa </span>
+          </a>
+        </li>
+     <!--Akhir -->
         <li class="nav-item sidebar-category">
           <p>Components</p>
           <span></span>
