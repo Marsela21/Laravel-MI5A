@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fakultas;
 use App\Models\prodiis;
 use Illuminate\Http\Request;
 
@@ -12,12 +13,11 @@ class ProdiisController extends Controller
      */
     public function index()
     {
-        // panggil model prodiis
+ // Panggil model Prodi
         $result = prodiis::all();
-       // dd($result);
 
-       //kirim data $result ke view prodiis/index.blade.php
-       return view('Prodiis.index')->with('Prodiis', $result);
+        // Kirim data $result ke views prodi/index.blade.php
+        return view('prodi.index')->with('prodi', $result);
     }
 
     /**
@@ -25,7 +25,8 @@ class ProdiisController extends Controller
      */
     public function create()
     {
-        //
+        $fakultas = Fakultas::all();
+        return view('prodi.create')->with('fakultas', $fakultas);
     }
 
     /**
@@ -33,7 +34,21 @@ class ProdiisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+
+        //validasi input
+        $input = $request->validate([
+            "nama"      =>"required|unique:fakultas",
+            "kaprodi"    =>"required",
+            "singkatan" =>"required",
+
+        ]);
+
+        //simpan
+        prodiis::create($input);
+
+        //redirect berserta pesan success
+        return redirect()->route('fakultas.index')->with('success', $request->nama.' berhasil disimpan');
     }
 
     /**
