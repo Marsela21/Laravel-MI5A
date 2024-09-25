@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+use App\Models\prodiis;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
@@ -14,7 +15,6 @@ class MahasiswaController extends Controller
     {
         // panggil model mahasiswa
         $result = Mahasiswa::all();
-       // dd($result);
 
        //kirim data $result ke view fakultas/index.blade.php
        return view('mahasiswa.index')->with('mahasiswa', $result);
@@ -25,7 +25,8 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        $prodi = prodiis::all();
+        return view('mahasiswa.create')->with('prodi', $prodi);
     }
 
     /**
@@ -33,7 +34,24 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validasi input
+        $input = $request->validate([
+            "npm"            =>"required|unique:mahasiswas",
+            "nama"           =>"required",
+            "tanggal_lahir"  =>"required",
+            "tempat_lahir"   =>"required",
+            "email"          =>"required",
+            "hp"             =>"required",
+            "alamat"         =>"required",
+            "prodi_id"       =>"required"
+
+        ]);
+
+        //simpan
+        Mahasiswa::create($input);
+
+        //redirect berserta pesan success
+        return redirect()->route('mahasiswa.index')->with('success', $request->nama.' berhasil disimpan');
     }
     
     /**

@@ -20,7 +20,7 @@
     @error('singkatan')
         <span class="text-danger">({{ $message }})</span>
     @enderror 
-    <input type="date" name="singkatan" id="" class="form-control mb-2"value="{{ $fakultas['singkatan'] }}">
+    <input type="text" name="singkatan" id="" class="form-control mb-2"value="{{ $fakultas['singkatan'] }}">
 
     <button type="submit" class="btn btn-primary">Simpan</button>
 </form>

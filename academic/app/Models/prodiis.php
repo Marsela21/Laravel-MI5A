@@ -15,5 +15,5 @@ class prodiis extends Model
     {
          return $this->belongsTo(Fakultas::class, 'fakultas_id', 'id');
     }
-    protected $fillable = ['nama', 'kaprodi', 'singkatan'];
+    protected $fillable = ["nama", "kaprodi", "singkatan","fakultas_id"];
 }

@@ -2,7 +2,7 @@
 
 @section('content')
 <h4>Program Studi</h4>
-<form action="{{ route('prodi.store') }}" method="post">
+<form action="{{ route('prodiis.store') }}" method="post">
     @csrf
     Nama 
     @error('nama')

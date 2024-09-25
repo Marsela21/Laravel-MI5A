@@ -13,7 +13,7 @@ class ProdiisController extends Controller
      */
     public function index()
     {
- // Panggil model Prodi
+        // Panggil model Prodi
         $result = prodiis::all();
 
         // Kirim data $result ke views prodi/index.blade.php
@@ -34,13 +34,13 @@ class ProdiisController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
 
         //validasi input
         $input = $request->validate([
-            "nama"      =>"required|unique:fakultas",
-            "kaprodi"    =>"required",
-            "singkatan" =>"required",
+            "nama"          =>"required|unique:prodiis",
+            "kaprodi"       =>"required",
+            "singkatan"     =>"required",
+            "fakultas_id"   =>"required"
 
         ]);
 
@@ -48,7 +48,7 @@ class ProdiisController extends Controller
         prodiis::create($input);
 
         //redirect berserta pesan success
-        return redirect()->route('fakultas.index')->with('success', $request->nama.' berhasil disimpan');
+        return redirect()->route('prodiis.index')->with('success', $request->nama.' berhasil disimpan');
     }
 
     /**
