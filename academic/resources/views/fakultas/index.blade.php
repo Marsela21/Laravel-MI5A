@@ -10,7 +10,7 @@
                 <th>Nama Dekan</th>
                 <th>Singkatan</th>
                 {{-- yang ditambahkan --}}
-                <th>#</th>
+                <th>Ubah Data</th>
             </tr>
         </thead>
         <tbody> 

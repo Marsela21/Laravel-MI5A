@@ -62,17 +62,35 @@ class ProdiisController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(prodiis $prodiis)
+    public function edit($id)
     {
-        //
+        $prodiis = prodiis::find($id);
+        $fakultas = Fakultas::all();
+        //dd($prodi); 
+        return view('prodi.edit')->with('prodiis', $prodiis)->with('fakultas', $fakultas);  
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, prodiis $prodiis)
+    public function update(Request $request, $id)
     {
-        //
+        $prodiis = prodiis::find($id);
+        // dd($fakultas);
+
+        //validasi input
+        $input = $request->validate([
+            "nama"          =>"required",
+            "kaprodi"       =>"required",
+            "singkatan"     =>"required",
+            "fakultas_id"   =>"required"
+        ]);
+        
+        // update data
+        $prodiis->update($input);
+
+        //redirect berserta pesan success
+        return redirect()->route('prodiis.index')->with('success', $request->nama.' berhasil diubah');
     }
 
     /**

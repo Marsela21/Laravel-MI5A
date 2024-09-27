@@ -10,6 +10,8 @@
             <th>Kaprodi</th>
             <th>Singkatan</th>
             <th>Fakultas</th>
+            {{-- yang ditambahkan --}}
+            <th>Ubah Data</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +21,8 @@
                 <td>{{ $row['kaprodi'] }}</td>
                 <td>{{ $row['singkatan'] }}</td>
                 <td>{{ $row['fakultas']['nama'] }}</td>
+            {{-- yg ditambahkan utk menambahakn button ubah --}}            
+            <td><a href="{{ route ('prodiis.edit', $row['id'])}}" class="btn btn-xs btn-warning">Ubah</a></td>
             </tr>
         @endforeach
     </tbody>
