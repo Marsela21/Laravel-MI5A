@@ -96,8 +96,12 @@ class ProdiisController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(prodiis $prodiis)
+    public function destroy($id)
     {
-        //
+        $prodiis = Prodiis::find($id);
+        //utk cek artibut
+        //dd($fakultas);
+        $prodiis->delete();
+        return redirect()->route('prodiis.index')->with('success', 'Data Prodi Berhasil Dihapus');
     }
 }

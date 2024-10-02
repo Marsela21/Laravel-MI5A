@@ -22,9 +22,15 @@
                 <td>{{ $row['singkatan'] }}</td>
                 <td>{{ $row['fakultas']['nama'] }}</td>
             {{-- yg ditambahkan utk menambahakn button ubah --}}            
-            <td><a href="{{ route ('prodiis.edit', $row['id'])}}" class="btn btn-xs btn-warning">Ubah</a></td>
-            </tr>
+            <td><a href="{{ route ('prodiis.edit', $row['id'])}}" class="btn btn-xs btn-warning">Ubah</a>
+                <form action="{{ route('prodiis.destroy', $row['id']) }}" method="post" style="display:inline">
+                    @method('DELETE')
+                    @csrf
+                    <button class="btn btn-xs btn-danger">Hapus</button>
+                </form>
+            </td>
+        </tr>
         @endforeach
-    </tbody>
-</table>
+        </tbody>
+    </table>
 @endsection
