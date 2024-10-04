@@ -7,16 +7,20 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-<figure class="highcharts-figure">
-    <div id="container"></div>
-    <p class="highcharts-description">
-        A basic column chart comparing estimated corn and wheat production
-        in some countries.
+{{-- utk membuat gambar ke samping --}}
+<div class="row">
+    <div class="col">
+        <figure class="highcharts-figure">
+            <div id="container"></div>
+        </figure>
+    </div>
+    <div class="col">
+        <figure class="highcharts-figure">
+            <div id="container2"></div>
+        </figure>
+    </div>
+</div>
 
-        The chart is making use of the axis crosshair feature, to highlight
-        the hovered country.
-    </p>
-</figure>
 
 {{-- css --}}
 <style>
@@ -115,6 +119,64 @@ Highcharts.chart('container', {
             name: 'Mahasiswa',
             data: [
             @foreach($mahasiswa as $row)
+                {{ $row->jumlah }},
+            @endforeach               
+            ]
+        }
+    ]
+});
+
+</script>
+{{-- perbandingan berdarkan kota mahasiswa --}}
+{{-- html --}}
+
+{{-- Java Script diambil dri highchart --}}
+<script>
+    // yang ditambahkan dari copasus(copy,paste,susun)
+Highcharts.chart('container2', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Perbandingan jumlah mahasiswa berdasarkan Kota mahasiswa',
+        align: 'left'
+    },
+    subtitle: {
+        text:
+            'Source: Academic App',
+        align: 'left'
+    },
+    xAxis: {
+        categories: [
+            @foreach($mahasiswa_tempatlahir as $row)
+                '{{ $row->tempat_lahir }}',
+            @endforeach
+        ],
+        crosshair: true,
+        accessibility: {
+            description: 'Tempat Lahir'
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: '1000 metric tons (MT)'
+        }
+    },
+    tooltip: {
+        valueSuffix: ' (1000 MT)'
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [
+        {
+            name: 'Mahasiswa',
+            data: [
+            @foreach($mahasiswa_tempatlahir as $row)
                 {{ $row->jumlah }},
             @endforeach               
             ]

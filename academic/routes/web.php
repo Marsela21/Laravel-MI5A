@@ -11,7 +11,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard'); //->middleware(['auth', 'verified'])
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);//->middleware(['auth', 'verified'])
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 //yg di tambahkan
-Route::resource('fakultas', FakultasController::class);
-Route::resource('prodiis', ProdiisController::class);
-Route::resource('mahasiswa', MahasiswaController::class);
+Route::resource('fakultas', FakultasController::class)->middleware(['auth', 'verified']);
+Route::resource('prodiis', ProdiisController::class)->middleware(['auth', 'verified']);
+Route::resource('mahasiswa', MahasiswaController::class)->middleware(['auth', 'verified']);
 require __DIR__.'/auth.php';
