@@ -104,4 +104,11 @@ class ProdiisController extends Controller
         $prodiis->delete();
         return redirect()->route('prodiis.index')->with('success', 'Data Prodi Berhasil Dihapus');
     }
+        public function getProdi() {
+        $response['data'] = prodiis::with('fakultas')->get();
+        $response['message'] = 'List Data Prodi';
+        $response['success'] = true;
+        
+        return response()->json($response, 200);
+    }
 }

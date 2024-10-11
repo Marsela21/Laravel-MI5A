@@ -8,7 +8,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    // yg diubah
+    return view('auth.loginnew');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);//->middleware(['auth', 'verified'])
@@ -24,4 +25,4 @@ Route::resource('prodiis', ProdiisController::class)->middleware(['auth', 'verif
 Route::resource('mahasiswa', MahasiswaController::class)->middleware(['auth', 'verified']);
 require __DIR__.'/auth.php';
 
-// 
+ 

@@ -87,4 +87,12 @@ class MahasiswaController extends Controller
     {
         //
     }
+    // yang ditambahkan API
+        public function getMahasiswa() {
+        $response['data'] = Mahasiswa::with(relations: 'prodi.fakultas')->get();
+        $response['message'] = 'List Data Mahasiswa';
+        $response['success'] = true;
+        
+        return response()->json($response, 200);
+    }
 }

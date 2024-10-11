@@ -100,4 +100,32 @@ class FakultasController extends Controller
         $fakultas->delete();
         return redirect()->route('fakultas.index')->with('success', 'Data Fakultas Berhasil Dihapus');
     }
+// yg ditambahkan utk API
+    public function getFakultas() {
+        $response['data'] = Fakultas::all();
+        $response['message'] = 'List Data Fakultas';
+        $response['success'] = true;
+
+        return response()->json($response, 200);
+    }
+    public function storeFakultas(Request $request){
+        //validasi input
+        $input = $request->validate([
+            "nama"      =>"required|unique:fakultas",
+            "dekan"     =>"required",
+            "singkatan" =>"required"
+        ]);
+
+        //simpan
+        $hasil = Fakultas::create($input);
+        if($hasil){//jika data berhail disimpan
+            $response['success'] = true;
+            $response['messagge'] = $request->nama."Berhasil Disimpan";
+            return response()->json($response, 201); //utk data berhasil disimpan 201 create
+        }else {
+            $response['success'] = false;
+            $response['messagge'] = $request->nama."Gagal Disimpan";
+            return response()->json($response, 400);//400 utk bad request          
+        }
+    }
 }
