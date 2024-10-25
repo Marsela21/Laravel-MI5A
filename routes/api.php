@@ -17,3 +17,5 @@ Route::get('mahasiswa', [MahasiswaController::class, 'getMahasiswa']);
 
 //post utk menyimpan
 Route::post('fakultas', [FakultasController::class, 'storeFakultas']);
+//utk menghapus
+Route::delete('fakultas/{id}', [FakultasController::class, 'destroyFakultas']);
