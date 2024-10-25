@@ -55,7 +55,7 @@
                         <i class="mdi mdi-email-outline text-primary"></i>
                       </span>
                     </div>
-                    <input type="email" class="form-control form-control-lg border-left-0" placeholder="Email" name="emai4l">
+                    <input type="email" class="form-control form-control-lg border-left-0" placeholder="Email" name="email">
                   </div>
                 </div>
                 @error('email')
