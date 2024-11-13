@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\ProdiisController;
@@ -19,3 +20,7 @@ Route::get('mahasiswa', [MahasiswaController::class, 'getMahasiswa']);
 Route::post('fakultas', [FakultasController::class, 'storeFakultas']);
 //utk menghapus
 Route::delete('fakultas/{id}', [FakultasController::class, 'destroyFakultas']);
+//utk register (routes/api.php)
+Route::post('register', [AuthController::class, 'register']);
+//utk login (routes/api.php)
+Route::post('login', [AuthController::class, 'login']);
