@@ -15,7 +15,15 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ])) {
-            $user = Auth::user();
+            $user = Auth::user();//ambil data user dr tabel users sesuai dgn email dan pass
+            if($user->role == 'admin'){
+                $success['token'] = $user->createToken('MDPApp',
+                ['create', 'read', 'update', 'delete']) ->plainTextToken;//buat token            
+            }else {
+                $success['token'] = $user->createToken('MDPApp'
+                ['read'])->plainTextToken;//buat token               
+            }
+
             $success['token'] = $user->createToken('MDPApp')->plainTextToken;
             $success['name'] = $user->name;
             return response()->json($success, 201);

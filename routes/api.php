@@ -12,9 +12,16 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // yang ditambahkan
-Route::get('fakultas', [FakultasController::class, 'getFakultas'])->middleware('auth:sanctum');
-Route::get('prodi', [ProdiisController::class, 'getProdi'])->middleware('auth:sanctum');
+Route::get('fakultas', [FakultasController::class, 'getFakultas'])
+->middleware(['auth:sanctum', 'ability:read']);
+Route::get('prodi', [ProdiisController::class, 'getProdi'])
+->middleware(['auth:sanctum', 'ability:create']);
+
+Route::get('prodi', [ProdiisController::class, 'getProdi']);
+Route::get('prodi', [ProdiisController::class, 'storeProdi']);
+
 Route::get('mahasiswa', [MahasiswaController::class, 'getMahasiswa']);
+Route::post('mahasiswa', [MahasiswaController::class, 'storeMahasiswa']);
 
 //post utk menyimpan
 Route::post('fakultas', [FakultasController::class, 'storeFakultas']);

@@ -95,4 +95,44 @@ class MahasiswaController extends Controller
         
         return response()->json($response, 200);
     }
+
+    public function storeMahasiswa(Request $request)
+    {
+        //validasi input
+        $input = $request->validate([
+            "npm"            =>"required|unique:mahasiswas",
+            "nama"           =>"required",
+            "tanggal_lahir"  =>"required",
+            "tempat_lahir"   =>"required",
+            "email"          =>"required",
+            "hp"             =>"required",
+            "alamat"         =>"required",
+            "prodi_id"       =>"required",
+            "foto"           =>"nullable|image|mimes:jpg,jpeg,png,webp|max:2048"
+        ]);
+
+        //cek apakah ada file foto yang diupload
+        if($request->hasFile('foto')){
+            //upload foto ke folder 'image;
+            $fotoPath = $request->file('foto')->store('image', 'public');
+            //menambahkan path foto ke input data
+            $input['foto'] = $fotoPath;
+        }
+        $hasil = Mahasiswa::create($input);
+        if($hasil){//jika data berhail disimpan
+            $response['success'] = true;
+            $response['messagge'] = $request->nama. "Berhasil Disimpan";
+            return response()->json($response, 201); //utk data berhasil disimpan 201 create
+        }else {
+            $response['success'] = false;
+            $response['messagge'] = $request->nama. "Gagal Disimpan";
+            return response()->json($response, 400);//400 utk bad request         
+
+        //simpan
+        Mahasiswa::create($input);
+
+        //redirect berserta pesan success
+        return redirect()->route('mahasiswa.index')->with('success', $request->nama.' berhasil disimpan');
+    }
+}
 }
