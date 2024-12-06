@@ -7,14 +7,29 @@ export default function List(){
 
     useEffect( () => {
         axios.get("https://laravel-mi5a.vercel.app/api/api/fakultas")
-        .then( (response) => {
+        .then( response => {
             console. log(response);
-            setFakultas(response.data.result)
+            setFakultas(response.data.data)//disesuaikan dari inspect
         })
     }, [] )
     return (
         <>
         <h2>List Fakultas</h2>
+        <table className="table">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                </tr>
+            </thead>
+            <tbody>
+                {fakultas.map( (data) => (
+                <tr key={data.id}>
+                    <td>{data.nama}</td>
+                </tr>
+                ) )}
+
+            </tbody>
+        </table>
         </>
     )
 }
